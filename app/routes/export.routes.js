@@ -3,14 +3,15 @@
 /**
  * Module dependencies.
  */
-var feedModel = require('../model/feed.model');
+
+var exportModel = require('../model/export.model');
 var responseHandler = require('../utils/response.handler');
 
 module.exports = function(routes) {
 
-    // get export model
+    // get competence for all people
     routes.get('/', function(request, response) {
-        feedModel.getFeedModel(request.headers)
+        exportModel.getExportModel(request.headers)
             .then(responseHandler.sendJsonResponse(response))
             .catch(responseHandler.sendErrorResponse(response));
     });

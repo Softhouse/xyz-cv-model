@@ -13,6 +13,7 @@ var officeRoutes = require('./routes/office.routes')(express.Router());
 var searchRoutes = require('./routes/search.routes')(express.Router());
 var peopleRoutes = require('./routes/people.routes')(express.Router());
 var feedRoutes = require('./routes/feed.routes')(express.Router());
+var exportRoutes = require('./routes/export.routes')(express.Router());
 var dashboardRoutes = require('./routes/dashboard.routes')(express.Router());
 
 var errorMiddleware = require('./middleware/error.middleware');
@@ -54,6 +55,7 @@ app.use('/office', officeRoutes);
 app.use('/search', searchRoutes);
 app.use('/people', peopleRoutes);
 app.use('/feed', feedRoutes);
+app.use('/export', exportRoutes);
 app.use('/dashboard', dashboardRoutes);
 
 app.use(errorMiddleware.errorFilter);

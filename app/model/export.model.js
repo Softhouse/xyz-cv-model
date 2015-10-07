@@ -7,8 +7,8 @@ var userToSkillConnector = require('../resource/userToSkillConnector.resource');
 var userToOfficeConnector = require('../resource/userToOfficeConnector.resource');
 var Promise = require('bluebird');
 
-exports.getDashboardModel = function(headers) {
-    return getDashboardTemplate()
+exports.getExportModel = function(headers) {
+    return getExportTemplate()
         .then(setCompetence(headers))
         .then(setOfficeNames(headers));
 };
@@ -30,7 +30,7 @@ function setOfficeNames(headers) {
     };
 }
 
-function getDashboardTemplate(users) {
+function getExportTemplate(users) {
     return new Promise(function(resolve) {
         var template = {
             competence: [],
@@ -68,6 +68,19 @@ function getOfficeNameForUser(officeConnector, offices, userId) {
     return officeName;
 }
 
+function getSkillLevelForUser(userToSkillConnector, userId, skillId) {
+    var level = '';
+
+    for (var i = 0; i < userToSkillConnector.length; i++) {
+        if (userId === userToSkillConnector[i].userId && skillId === userToSkillConnector[i].skillId) {
+            level = userToSkillConnector[i].level;
+            break;
+        }
+    }
+
+    return level;
+}
+
 function getListOfUsersWithLevelForSkill(users, connectors, offices, skill, userToOfficeConnectors) {
     var userList = [];
     var userLevel;
@@ -82,19 +95,6 @@ function getListOfUsersWithLevelForSkill(users, connectors, offices, skill, user
     });
 
     return userList;
-}
-
-function getSkillLevelForUser(userToSkillConnector, userId, skillId) {
-    var level = '';
-
-    for (var i = 0; i < userToSkillConnector.length; i++) {
-        if (userId === userToSkillConnector[i].userId && skillId === userToSkillConnector[i].skillId) {
-            level = userToSkillConnector[i].level;
-            break;
-        }
-    }
-
-    return level;
 }
 
 function setCompetence(headers) {
