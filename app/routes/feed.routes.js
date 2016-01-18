@@ -8,7 +8,7 @@ var responseHandler = require('../utils/response.handler');
 
 module.exports = function(routes) {
 
-    // get dashboard model
+    // get export model
     routes.get('/', function(request, response) {
         feedModel.getFeedModel(request.headers)
             .then(responseHandler.sendJsonResponse(response))

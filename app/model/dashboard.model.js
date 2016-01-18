@@ -68,19 +68,6 @@ function getOfficeNameForUser(officeConnector, offices, userId) {
     return officeName;
 }
 
-function getSkillLevelForUser(userToSkillConnector, userId, skillId) {
-    var level = '';
-
-    for (var i = 0; i < userToSkillConnector.length; i++) {
-        if (userId === userToSkillConnector[i].userId && skillId === userToSkillConnector[i].skillId) {
-            level = userToSkillConnector[i].level;
-            break;
-        }
-    }
-
-    return level;
-}
-
 function getListOfUsersWithLevelForSkill(users, connectors, offices, skill, userToOfficeConnectors) {
     var userList = [];
     var userLevel;
@@ -95,6 +82,19 @@ function getListOfUsersWithLevelForSkill(users, connectors, offices, skill, user
     });
 
     return userList;
+}
+
+function getSkillLevelForUser(userToSkillConnector, userId, skillId) {
+    var level = '';
+
+    for (var i = 0; i < userToSkillConnector.length; i++) {
+        if (userId === userToSkillConnector[i].userId && skillId === userToSkillConnector[i].skillId) {
+            level = userToSkillConnector[i].level;
+            break;
+        }
+    }
+
+    return level;
 }
 
 function setCompetence(headers) {
